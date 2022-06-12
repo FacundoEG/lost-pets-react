@@ -4,36 +4,35 @@ import { Title, Caption } from "ui/fonts/Fonts";
 import { HomeButton } from "components/HomeButton";
 import { usePetsNearby } from "../../hooks";
 import { LostPet } from "components/PetCard";
-
-const handleContainerData = (response) => {
-  if (!response) {
-    return null;
-  } else if (response.length === 0) {
-    return (
-      <Caption>No encontramos mascotas perdidas cerca de tu ubicación.</Caption>
-    );
-  } else if (response.length > 0) {
-    return response.map((pet) => (
-      <LostPet
-        onClick={() => {
-          console.log("e");
-        }}
-        key={pet.id}
-        name={pet.name}
-        petId={pet.id}
-        ubication={pet.ubication}
-        photo={pet.photoUrl}
-      ></LostPet>
-    ));
-  }
-};
+import { ReportModal } from "components/ReportModal";
 
 export const Home = () => {
+  const [modalState, SetModalState] = React.useState(false);
+  const [modalData, SetModalData] = React.useState({});
   const petsNearby = usePetsNearby();
-  console.log(petsNearby, "petsNearby hook result");
+
+  const handleModal = (e) => {
+    SetModalData({ name: e.name, petId: e.petId });
+    SetModalState(true);
+  };
+
+  const handleModalClose = (e) => {
+    SetModalState(false);
+  };
 
   return (
     <div className={css["welcome-container"]}>
+      {
+        <section className={css["modal-contaner"]}>
+          {modalState ? (
+            <ReportModal
+              onClose={handleModalClose}
+              name={modalData["name"]}
+              petId={modalData["petId"]}
+            ></ReportModal>
+          ) : null}
+        </section>
+      }
       <section className={css["main-conteiner"]}>
         <Title>Mascotas perdidas cerca tuyo</Title>
         <Caption>
@@ -43,7 +42,18 @@ export const Home = () => {
         <HomeButton>Dar mi ubicación</HomeButton>
       </section>
       <div className={css["data-container"]}>
-        {handleContainerData(petsNearby)}
+        {petsNearby
+          ? petsNearby.map((pet) => (
+              <LostPet
+                onSearch={handleModal}
+                key={pet.id}
+                name={pet.name}
+                petId={pet.id}
+                ubication={pet.ubication}
+                photo={pet.photoUrl}
+              ></LostPet>
+            ))
+          : ""}
       </div>
     </div>
   );

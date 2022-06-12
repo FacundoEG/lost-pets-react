@@ -8,6 +8,27 @@ export function usePetsNearby() {
   const itemResult = useRecoilValue(lostPetsNearby);
   return itemResult;
 }
+
+export function useLogin() {
+  if (!localStorage.userData) {
+    return false;
+  }
+  return true;
+}
+
+/* 
+
+
+
+export function useModalData() {
+  const modalData = useRecoilValue(reportPetData);
+  return modalData;
+}
+
+export function useSetModalData() {
+  const setModalData = useSetRecoilState(reportPetData);
+  return setModalData;
+} */
 /* 
 // SEARCH ITEM HOOK
 export function useItemResults() {

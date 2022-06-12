@@ -23,3 +23,27 @@ export function getLostPetsByGeo({ lat, lng }) {
       return finalres;
     });
 }
+
+export function sendPetReportInfo(reportData) {
+  return fetch(API_BASE_URL + "/pets/report", {
+    method: "post",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(reportData),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .then((finalres) => {
+      return finalres;
+    });
+}
+
+export async function sendPetReportInfoTest(reportData) {
+  return await (
+    await fetch(API_BASE_URL + "/pets/report", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(reportData),
+    })
+  ).json();
+}

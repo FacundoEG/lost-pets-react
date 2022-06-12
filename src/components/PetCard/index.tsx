@@ -2,9 +2,10 @@ import React from "react";
 import css from "./petCard.css";
 import { Subtitle, ParrafoBold, Caption, LinkText } from "ui/fonts/Fonts";
 
-export function LostPet(props, onClick) {
-  const handleClick = (e) => {
-    onClick(e);
+export function LostPet(props) {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onSearch(props);
   };
 
   return (
@@ -21,7 +22,7 @@ export function LostPet(props, onClick) {
         <ParrafoBold>Ubicacion: </ParrafoBold>
         <Caption>{props.ubication}</Caption>
       </label>
-      <div onClick={handleClick} className={css["card-link"]}>
+      <div onClick={handleSubmit} className={css["card-link"]}>
         <LinkText>Reportar Información</LinkText>
       </div>
     </div>

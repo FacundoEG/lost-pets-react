@@ -13,7 +13,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />}></Route>
-        <Route path="/auth-page" element={<Auth />}></Route>
+        <Route path="/auth" element={<Auth />}></Route>
         <Route path="/my-data" element={<MyData />}></Route>
         <Route path="/report-pet" element={<ReportPet />}></Route>
         <Route path="/edit-pet" element={<EditPet />}></Route>

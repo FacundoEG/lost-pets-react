@@ -32,3 +32,7 @@ export function Caption({ children }) {
 export function ErrorText({ children }) {
   return <p className={css["error-text"]}>{children}</p>;
 }
+
+export function ErrorTextBold({ children }) {
+  return <p className={css["error-text-bold"]}>{children}</p>;
+}

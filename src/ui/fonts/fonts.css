@@ -1,3 +1,7 @@
+* {
+  font-family: "Montserrat";
+}
+
 .home-title {
   text-align: center;
   max-width: 600px;
@@ -34,8 +38,6 @@
   box-sizing: border-box;
   font-weight: bold;
   font-size: 16px;
-
-  font-family: "Montserrat";
 }
 
 .link-text {
@@ -76,4 +78,12 @@
   color: #fb2424;
   text-transform: uppercase;
   text-align: center;
+}
+
+.error-text-bold {
+  margin: 0;
+  box-sizing: border-box;
+  font-weight: bold;
+  color: #fb2424;
+  font-size: 16px;
 }

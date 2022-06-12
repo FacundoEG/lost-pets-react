@@ -16,6 +16,19 @@ export const lostPetsNearby = selector({
     } else undefined;
   },
 });
+/* 
+export const reportPetData = atom({
+  key: "reportPetData",
+  default: {},
+});
+
+export const petToReportData = selector({
+  key: "petToReportData",
+  get: async ({ get }) => {
+    const petData = get(reportPetData);
+    return petData;
+  },
+}); */
 
 /* 
 export const itemQueryState = atom({
