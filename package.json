@@ -29,6 +29,7 @@
     "nuka-carousel": "^5.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.32.2",
     "react-router-dom": "^6.2.2",
     "recoil": "^0.7.0",
     "style-loader": "^3.3.1",

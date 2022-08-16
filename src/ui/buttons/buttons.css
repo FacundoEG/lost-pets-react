@@ -20,3 +20,17 @@ a {
     width: 355px;
   }
 }
+
+.form-button {
+  min-height: 50px;
+  min-width: 265px;
+  border-radius: 4px;
+  border: 3px solid #2c2c2c;
+  background-color: var(--button1-bgc);
+  color: var(--font-colorWht);
+  cursor: pointer;
+}
+
+.form-button:active {
+  background-color: var(--button-active);
+}

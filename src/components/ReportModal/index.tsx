@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import css from "./reportModal.css";
 import { Title, Caption, ParrafoBold, ErrorTextBold } from "ui/fonts/Fonts";
-import { sendPetReportInfo, sendPetReportInfoTest } from "lib/api";
+import { sendPetReportInfo } from "lib/api";
 
 export const ReportModal = (props) => {
   const [buttonText, setButtonText] = useState(null);
@@ -15,7 +15,7 @@ export const ReportModal = (props) => {
       message: e.target.message.value,
     };
 
-    const reportResponse = await sendPetReportInfoTest(reportData);
+    const reportResponse = await sendPetReportInfo(reportData);
 
     console.log(reportResponse);
     if (reportResponse.message) {

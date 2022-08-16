@@ -7,8 +7,11 @@ import { ReportPet } from "pages/report-pet";
 import { MyPets } from "pages/my-pets";
 import { Auth } from "pages/auth";
 import { Layout } from "components/layout/Layout";
+import { useLocalStorageData } from "hooks";
 
 function AppRoutes() {
+  useLocalStorageData();
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

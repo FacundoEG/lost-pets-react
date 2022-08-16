@@ -110,6 +110,7 @@
   padding: 5px;
   color: var(--font-link-color);
   cursor: pointer;
+  text-align: center;
 }
 
 .user-data__icon-menu {
@@ -185,10 +186,20 @@
     align-items: center;
     width: 100%;
     padding: 0;
+    height: 40px;
+    justify-content: center;
   }
 
   .header-nav-links p {
     font-size: 17px;
+  }
+
+  .header-nav-links p:hover:is(:last-child) {
+    color: var(--font-link-color);
+  }
+
+  .header-nav-links p:active {
+    color: inherit;
   }
 
   .user-data__box {
@@ -196,6 +207,14 @@
   }
 
   .user-data__container:hover .user-data__icon-menu {
+    display: flex;
+  }
+
+  .user-data__icon-menu:hover {
+    display: inherit;
+  }
+
+  .user-data__icon-menu:hover {
     display: flex;
   }
 

@@ -1,24 +1,32 @@
-import React, { CSSProperties } from "react";
+import { userData as localUserData, pageToGo } from "atoms";
+import { useLocalUserData } from "hooks";
+import React, { CSSProperties, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { LinkText, Parrafo, ParrafoBold, Subtitle } from "ui/fonts/Fonts";
-import { useLogin } from "hooks";
 import css from "./appHeader.css";
+import { HamburgerMenu } from "./components/HamburgerMenu";
+import { NavLinks } from "./components/NavLinks";
 
-export const AppHeader = (props) => {
-  const [isToggle, setIsToggle] = React.useState(false);
-  const isLogged = useLogin();
+export const AppHeader = () => {
+  const [isToggle, setIsToggle] = useState(false);
   const navigate = useNavigate();
+  const userData = useLocalUserData();
+  const userDataSetter = useSetRecoilState(localUserData);
+  const pageToGoSetter = useSetRecoilState(pageToGo);
+  const userHasToken = userData?.token ? true : false;
 
   const toggleMenu = () => {
     setIsToggle(!isToggle);
   };
 
   const redirectTo = (path: string) => {
-    if (isLogged && path != "/") {
+    if (userHasToken && path != "/") {
       navigate(path, { replace: true }), [navigate];
     } else {
+      pageToGoSetter(path);
       navigate("auth", { replace: true }), [navigate];
-      toggleMenu();
+      setIsToggle(false);
     }
 
     if (path == "/") {
@@ -26,12 +34,6 @@ export const AppHeader = (props) => {
       setIsToggle(false);
     }
   };
-
-  const toggleStyle: CSSProperties = isToggle
-    ? {
-        right: 0,
-      }
-    : {};
 
   return (
     <header className={css["header-comp"]}>
@@ -43,75 +45,21 @@ export const AppHeader = (props) => {
         ></img>
       </a>
 
-      <nav className={css["header-nav"]}>
-        <div className={css["header-nav-links"]}>
-          <a onClick={() => redirectTo("/my-data")}>
-            <ParrafoBold>Mis Datos</ParrafoBold>
-          </a>
-          <a onClick={() => redirectTo("/my-pets")}>
-            <ParrafoBold>Mis mascotas reportadas</ParrafoBold>
-          </a>
-          <a onClick={() => redirectTo("/report-pet")}>
-            <ParrafoBold>Reportar mascota</ParrafoBold>
-          </a>
-          <div className={css["user-data__container"]}>
-            <div className={css["user-data__box"]}>
-              <img
-                src="https://lost-pets-app.herokuapp.com/user.73783fc8.png"
-                className={css["user-data__img"]}
-              ></img>
-              <Parrafo>User Email</Parrafo>
-              <div className={css["user-data__icon-menu"]}>
-                <a onClick={() => redirectTo("/auth")}>
-                  <LinkText>INICIAR SESIÓN </LinkText>
-                </a>
-              </div>
+      <NavLinks
+        redirectTo={redirectTo}
+        userData={userData}
+        userHasToken={userHasToken}
+        userDataSetter={userDataSetter}
+      />
 
-              <img
-                src="src/assets/downarrow.png"
-                className={css["user-data__img"]}
-              ></img>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div className={css["hamburger-menu"]}>
-        <nav className={css["header-comp__window-menu"]} style={toggleStyle}>
-          <button
-            onClick={toggleMenu}
-            className={css["header-comp__window-closebutton"]}
-          >
-            <img
-              src="https://lost-pets-app.herokuapp.com/x-mark-white.42bb5c39.png"
-              className={css["header-comp__window-closebutton__img"]}
-            ></img>
-          </button>
-
-          <div className={css["header-comp__window-menu-link"]}>
-            <a onClick={() => redirectTo("/my-data")}>
-              <Subtitle>Mis Datos</Subtitle>
-            </a>
-            <a onClick={() => redirectTo("/my-pets")}>
-              <Subtitle>Mis mascotas reportadas</Subtitle>
-            </a>
-            <a onClick={() => redirectTo("/report-pet")}>
-              <Subtitle>Reportar mascota</Subtitle>
-            </a>
-
-            <div className={css["user-data__container"]}>
-              <div className={css["user-data__box"]}>
-                <img
-                  src="https://lost-pets-app.herokuapp.com/user.73783fc8.png"
-                  className={css["user-data__img"]}
-                ></img>
-                <Parrafo>User Email</Parrafo>
-              </div>
-              <LinkText>Iniciar Sesión</LinkText>
-            </div>
-          </div>
-        </nav>
-      </div>
+      <HamburgerMenu
+        redirectTo={redirectTo}
+        toggleMenu={toggleMenu}
+        isToggle={isToggle}
+        userData={userData}
+        userHasToken={userHasToken}
+        userDataSetter={userDataSetter}
+      />
 
       <button onClick={toggleMenu} className={css["hamburger-button"]}>
         <img

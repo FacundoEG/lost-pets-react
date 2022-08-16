@@ -12,38 +12,51 @@ export function test() {
     });
 }
 
-export function getLostPetsByGeo({ lat, lng }) {
-  return fetch(API_BASE_URL + `/pets/getbygeo?lat=${lat}&lng=${lng}`, {
-    method: "get",
-  })
-    .then((res) => {
-      return res.json();
+export async function getLostPetsByGeo({ lat, lng }) {
+  return await (
+    await fetch(API_BASE_URL + `/pets/getbygeo?lat=${lat}&lng=${lng}`, {
+      method: "get",
     })
-    .then((finalres) => {
-      return finalres;
-    });
+  ).json();
 }
 
-export function sendPetReportInfo(reportData) {
-  return fetch(API_BASE_URL + "/pets/report", {
-    method: "post",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(reportData),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((finalres) => {
-      return finalres;
-    });
-}
-
-export async function sendPetReportInfoTest(reportData) {
+export async function sendPetReportInfo(reportData) {
   return await (
     await fetch(API_BASE_URL + "/pets/report", {
       method: "post",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(reportData),
+    })
+  ).json();
+}
+
+export async function emailCheck(emailData) {
+  return await (
+    await fetch(API_BASE_URL + "/auth", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(emailData),
+    })
+  ).json();
+}
+
+export async function getAuthToken(loginData) {
+  return await (
+    await fetch(API_BASE_URL + "/auth/token", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(loginData),
+    })
+  ).json();
+}
+
+export async function getUserData(userToken) {
+  return await (
+    await fetch(API_BASE_URL + `/user/data`, {
+      method: "get",
+      headers: {
+        Authorization: `bearer ${userToken}`,
+      },
     })
   ).json();
 }

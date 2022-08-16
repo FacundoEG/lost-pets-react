@@ -16,36 +16,45 @@ export const lostPetsNearby = selector({
     } else undefined;
   },
 });
-/* 
-export const reportPetData = atom({
-  key: "reportPetData",
+
+export const loginToken = atom({
+  key: "authToken",
   default: {},
 });
 
-export const petToReportData = selector({
-  key: "petToReportData",
+export const authToken = selector({
+  key: "authTokenCheck",
   get: async ({ get }) => {
-    const petData = get(reportPetData);
-    return petData;
+    const token = get(loginToken);
+    if (token) {
+      localStorage.setItem("userData", JSON.stringify({ token: token }));
+      return token;
+    } else undefined;
   },
-}); */
-
-/* 
-export const itemQueryState = atom({
-  key: "itemQuery",
-  default: "",
 });
 
-export const itemResultState = selector({
-  key: "itemResult",
+export const userData = atom({
+  key: "userData",
+  default: null,
+});
+
+export const localUserData = selector({
+  key: "localUserData",
   get: async ({ get }) => {
-    const itemQueryValue = get(itemQueryState);
-    if (itemQueryValue) {
-      const res = await fetch(
-        "https://api.mercadolibre.com/items/" + itemQueryValue
-      );
-      const itemData = await res.json();
-      return itemData;
-    } else return undefined;
+    const localData = get(userData);
+
+    if (!localData) {
+      return null;
+    }
+
+    if (localData) {
+      localStorage.setItem("userData", JSON.stringify(localData));
+      return localData;
+    } else undefined;
   },
-}); */
+});
+
+export const pageToGo = atom({
+  key: "pageToGo",
+  default: undefined,
+});

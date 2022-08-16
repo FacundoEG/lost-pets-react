@@ -13,10 +13,10 @@ export function MainButton({ children, onClick }) {
   );
 }
 
-export function MlButton({ children }) {
+export function FormButton({ children, type }) {
   return (
-    <a className={css["ml-anchor"]} href={children}>
-      <button className={css["ml-button"]}>Ver Producto</button>
-    </a>
+    <button type={type} className={css["form-button"]}>
+      {children}
+    </button>
   );
 }

@@ -1,11 +1,13 @@
 import React from "react";
-import css from "./home.css";
-import { HomeTitle } from "ui/fonts/Fonts";
+import css from "./auth.css";
+import { AuthForm } from "components/AuthForm";
+
 export const Auth = () => {
   return (
     <div className={css["welcome-container"]}>
-      <section className="main-conteiner"> </section>
-      <HomeTitle>Ingresar</HomeTitle>
+      <section className={css["main-container"]}>
+        <AuthForm></AuthForm>
+      </section>
     </div>
   );
 };
