@@ -57,11 +57,10 @@ export function HamburgerMenu({
           >
             <Subtitle>Reportar mascota</Subtitle>
           </a>
-
           <div className={css["user-data__container"]}>
             <div className={css["user-data__box"]}>
               <img
-                src="https://lost-pets-app.herokuapp.com/user.73783fc8.png"
+                src="../src/assets/user.png"
                 className={css["user-data__img"]}
               ></img>
               <Parrafo>{userData?.name ? userData?.name : "Invitadx"}</Parrafo>

@@ -1,9 +1,10 @@
 .welcome-container {
   background-blend-mode: soft-light;
+
   background-image: url(https://lost-pets-app.herokuapp.com/paw-backgr.9cbcfb26.png);
   background-repeat: revert;
   background-size: contain;
-  min-height: calc(100vh - 69px);
+  min-height: calc(100vh - 64px);
   padding: 30px 20px 70px;
   background-color: var(--page-bgc);
   display: flex;

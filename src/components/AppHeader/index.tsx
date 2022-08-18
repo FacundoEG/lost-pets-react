@@ -21,17 +21,17 @@ export const AppHeader = () => {
   };
 
   const redirectTo = (path: string) => {
+    setIsToggle(false);
+
     if (userHasToken && path != "/") {
       navigate(path, { replace: true }), [navigate];
     } else {
       pageToGoSetter(path);
       navigate("auth", { replace: true }), [navigate];
-      setIsToggle(false);
     }
 
     if (path == "/") {
       navigate(path, { replace: true }), [navigate];
-      setIsToggle(false);
     }
   };
 
@@ -40,7 +40,7 @@ export const AppHeader = () => {
       <a className={css["paw-icon"]} onClick={() => redirectTo("/")}>
         <img
           style={{ marginTop: "5px" }}
-          src="./src/assets/pet-hotel-sign-with-a-dog-and-a-cat-under-a-roof-line.png"
+          src="./src/assets/petsIcon.png"
           className={css["paw-image"]}
         ></img>
       </a>
@@ -63,7 +63,7 @@ export const AppHeader = () => {
 
       <button onClick={toggleMenu} className={css["hamburger-button"]}>
         <img
-          src="https://lost-pets-app.herokuapp.com/menu-icon.9040fb05.png"
+          src="./src/assets/menu-icon.png"
           className={css["hamburger-button-image"]}
         ></img>
       </button>

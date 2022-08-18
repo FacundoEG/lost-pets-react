@@ -5,10 +5,11 @@ import { FormButton } from "ui/buttons/Buttons";
 import { Caption, HomeTitle, ParrafoBold } from "ui/fonts/Fonts";
 import { useForm } from "react-hook-form";
 import { ErrorSignal } from "components/ErrorSignal";
-import { emailCheck, getAuthToken, getUserData } from "lib/api";
+import { createUser, emailCheck, getAuthToken, getUserData } from "lib/api";
 import { userData, pageToGo } from "atoms";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "components/Loader/Loader";
 
 export const AuthForm = (props) => {
   const { register, handleSubmit } = useForm();
@@ -16,21 +17,32 @@ export const AuthForm = (props) => {
   const previousPath = useRecoilValue(pageToGo);
   const setUserLocalData = useSetRecoilState(userData);
   const [errorData, setErrorData] = useState(undefined);
+  const [message, setMessage] = useState(undefined);
   const [loginData, setLoginData] = useState(undefined);
-  const [emailRegistered, setEmailRegistered] = useState(undefined);
+  const [isRegistered, setIsRegistered] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (loginData) {
+      const { email } = loginData;
+      if (email) {
+        makeEmailcheck(email);
+      }
+    }
+  }, [loginData]);
 
   async function makeEmailcheck(emailData) {
+    setIsLoading(true);
     const checkResponse = await emailCheck({ email: emailData });
-    if (checkResponse.true) {
-      setEmailRegistered(true);
-    } else {
-      setEmailRegistered(false);
-    }
+    checkResponse.true ? setIsRegistered(true) : setIsRegistered(false);
+    setIsLoading(false);
   }
 
   async function authUser(loginData) {
+    setIsLoading(true);
     const authToken = await getAuthToken(loginData);
 
+    setIsLoading(false);
     if (authToken.error) {
       setErrorData(authToken.error);
     }
@@ -42,22 +54,11 @@ export const AuthForm = (props) => {
         token: authToken.token,
       });
 
-      if (previousPath !== "/auth") {
-        navigate(previousPath, { replace: true }), [navigate];
-      } else {
-        navigate("/", { replace: true }), [navigate];
-      }
+      if (previousPath) navigate(previousPath, { replace: true }), [navigate];
+
+      if (previousPath == "/auth") navigate("/", { replace: true }), [navigate];
     }
   }
-
-  useEffect(() => {
-    if (loginData) {
-      const { email } = loginData;
-      if (email) {
-        makeEmailcheck(email);
-      }
-    }
-  }, [loginData]);
 
   const loginSubmit = (data) => {
     const { email, password } = data;
@@ -69,13 +70,11 @@ export const AuthForm = (props) => {
       setErrorData("Debes completar el email para poder continuar");
     }
 
-    if (emailRegistered && !password) {
+    if (isRegistered && !password) {
       setErrorData("Debes completar la contraseña para poder verificarte");
     }
 
-    if (emailRegistered && password) {
-      authUser(data);
-    }
+    if (isRegistered && password) authUser(data);
   };
 
   const signUpSubmit = (data) => {
@@ -85,14 +84,32 @@ export const AuthForm = (props) => {
     if (name && email && password && repeatedPassword) {
       if (password !== repeatedPassword) {
         setErrorData("Las contraseñas no coinciden");
-        console.log("se continua el login");
+      } else {
+        const newUserData = { name, email, password };
+        submitUser(newUserData);
       }
     } else {
       setErrorData("Faltan datos para completar el registro");
     }
   };
 
-  if (emailRegistered == false)
+  async function submitUser(formData) {
+    setIsLoading(true);
+
+    const createUserResponse = await createUser(formData);
+    setIsLoading(false);
+
+    if (createUserResponse.message) {
+      const { email, password } = formData;
+      setMessage(createUserResponse.message);
+
+      const authData = { email, password };
+      authUser(authData);
+      setIsLoading(false);
+    }
+  }
+
+  if (isRegistered == false)
     return (
       <>
         <HomeTitle>Registrate</HomeTitle>
@@ -101,20 +118,22 @@ export const AuthForm = (props) => {
           className={css["form-container"]}
           onSubmit={handleSubmit(signUpSubmit)}
         >
-          <LabeledInput
-            register={register}
-            type="email"
-            name="email"
-            label="Email"
-            {...props}
-          ></LabeledInput>
+          <div style={{ display: "none" }}>
+            <LabeledInput
+              register={register}
+              type="email"
+              name="email"
+              label="Email"
+              {...props}
+            ></LabeledInput>
+          </div>
 
           <LabeledInput
             register={register}
             name="name"
             type="text"
             label="Nombre"
-            {...props}
+            {...{ props }}
           ></LabeledInput>
 
           <br />
@@ -138,11 +157,13 @@ export const AuthForm = (props) => {
             <ParrafoBold>Crear cuenta</ParrafoBold>
           </FormButton>
         </form>
-        {errorData && <ErrorSignal>{errorData} </ErrorSignal>}
+        {errorData && <ErrorSignal>{errorData}</ErrorSignal>}
+        {message && <Caption>{message}</Caption>}
+        {isLoading ? <Loader /> : null}
       </>
     );
 
-  if (emailRegistered == undefined || true)
+  if (isRegistered == undefined || true)
     return (
       <>
         <HomeTitle>Ingresar</HomeTitle>
@@ -151,7 +172,7 @@ export const AuthForm = (props) => {
           className={css["form-container"]}
           onSubmit={handleSubmit(loginSubmit)}
         >
-          {!emailRegistered && (
+          {!isRegistered && (
             <LabeledInput
               register={register}
               type="email"
@@ -160,7 +181,7 @@ export const AuthForm = (props) => {
               {...props}
             ></LabeledInput>
           )}
-          {emailRegistered && (
+          {isRegistered && (
             <LabeledInput
               register={register}
               type="password"
@@ -174,6 +195,7 @@ export const AuthForm = (props) => {
           </FormButton>
         </form>
         {errorData && <ErrorSignal>{errorData} </ErrorSignal>}
+        {isLoading ? <Loader /> : null}
       </>
     );
 };

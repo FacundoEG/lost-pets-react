@@ -17,7 +17,6 @@ export const ReportModal = (props) => {
 
     const reportResponse = await sendPetReportInfo(reportData);
 
-    console.log(reportResponse);
     if (reportResponse.message) {
       e.target.reset();
       setButtonText(<ParrafoBold>{reportResponse.message}</ParrafoBold>);
@@ -43,7 +42,7 @@ export const ReportModal = (props) => {
           className={css["report-modal__closebutton"]}
         >
           <img
-            src="https://lost-pets-app.herokuapp.com/x-mark-white.42bb5c39.png"
+            src="./src/assets/x-mark-white.png"
             className={css["modal-content__img"]}
           ></img>
         </button>

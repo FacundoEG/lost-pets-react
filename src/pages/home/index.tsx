@@ -5,6 +5,7 @@ import { HomeButton } from "components/HomeButton";
 import { usePetsNearby } from "../../hooks";
 import { LostPet } from "components/PetCard";
 import { ReportModal } from "components/ReportModal";
+import pawBackground from "../../assets/paw-backgr.png";
 
 export const Home = () => {
   const [modalState, SetModalState] = React.useState(false);

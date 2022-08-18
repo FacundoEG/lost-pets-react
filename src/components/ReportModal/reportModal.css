@@ -37,13 +37,12 @@
 
 .modal-content {
   max-width: 500px;
-
   border-radius: 7px;
   background-color: var(--header-bgc);
   margin: auto;
   padding: 20px 20px 40px;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
 }
 @keyframes entrance {
   0% {
@@ -78,6 +77,16 @@
   gap: 30px;
 }
 
+.form-conteiner h2 {
+  font-size: 30px;
+}
+
+@media (min-width: 500px) {
+  .form-conteiner h2 {
+    font-size: 35px;
+  }
+}
+
 .form-conteiner__input {
   width: 100%;
   border: 3px solid #2c2c2c;
@@ -85,7 +94,7 @@
   height: 40px;
   padding: 0px 0px 0px 8px;
   font-size: 16px;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-weight: normal;
 }
 
@@ -104,7 +113,7 @@
   height: 40px;
   padding: 0px 0px 0px 8px;
   font-size: 16px;
-  font-family: "Montserrat";
+  font-family: "Poppins";
   font-weight: normal;
   height: 100px;
   padding-top: 5px;
@@ -140,11 +149,11 @@
 
 @media (max-width: 500px) {
   .modal-content {
-    padding: 20px 10px;
+    padding: 20px 15px;
   }
 }
 @media (max-width: 500px) {
   .form-conteiner {
-    gap: 5px;
+    gap: 25px;
   }
 }

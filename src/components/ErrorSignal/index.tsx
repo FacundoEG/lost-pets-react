@@ -5,10 +5,7 @@ import { ErrorText } from "ui/fonts/Fonts";
 export const ErrorSignal = ({ children }) => {
   return (
     <div className={css["container"]}>
-      <img
-        src="https://lost-pets-app.herokuapp.com/error.bfc52426.png"
-        className={css["icon"]}
-      />
+      <img src="./src/assets/error.png" className={css["icon"]} />
       <ErrorText>{children}</ErrorText>
     </div>
   );

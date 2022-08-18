@@ -60,3 +60,13 @@ export async function getUserData(userToken) {
     })
   ).json();
 }
+
+export async function createUser(userData) {
+  return await (
+    await fetch(API_BASE_URL + "/user", {
+      method: "post",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(userData),
+    })
+  ).json();
+}

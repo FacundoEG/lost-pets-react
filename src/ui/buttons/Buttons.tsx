@@ -7,7 +7,7 @@ export function MainButton({ children, onClick }) {
     onClick(e);
   };
   return (
-    <button onClick={handleClick} className={css["main-button"]}>
+    <button onClick={handleClick} className={css["form-button"]}>
       <ParrafoBold>{children}</ParrafoBold>
     </button>
   );

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./auth.css";
 import { AuthForm } from "components/AuthForm";
+import { Loader } from "components/Loader/Loader";
 
 export const Auth = () => {
   return (

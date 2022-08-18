@@ -26,7 +26,7 @@
 .paw-image,
 .hamburger-button-image,
 .header-comp__window-closebutton__img {
-  width: 40px;
+  max-width: 40px;
 }
 
 .paw-image6 {
@@ -38,6 +38,13 @@
   margin: 15px 15px 0px;
 }
 
+.hamburger-button:active,
+.paw-image:active,
+.header-comp__window-closebutton:active {
+  filter: invert(59%) sepia(35%) saturate(1935%) hue-rotate(224deg)
+    brightness(98%) contrast(88%);
+}
+
 .header-comp__window-menu {
   width: 100%;
   border-radius: 4px;
@@ -47,7 +54,7 @@
   position: fixed;
   background-color: var(--header-bgc);
   top: 0;
-  transition: right 1s ease-in-out;
+  transition: right 600ms ease-out;
   right: -100%;
   border: 1px solid #2c2c2c;
 }
@@ -73,6 +80,7 @@
   text-align: center;
   font-weight: bold;
   cursor: pointer;
+  transition: all 400ms ease-in-out;
 }
 
 .header-comp__window-menu-link > a:hover {
@@ -107,7 +115,6 @@
 
 .user-data__container > a {
   font-size: 18px;
-  padding: 5px;
   color: var(--font-link-color);
   cursor: pointer;
   text-align: center;
@@ -156,10 +163,6 @@
   color: inherit;
 }
 
-.header-nav-links p {
-  font-size: 20px;
-}
-
 @media (min-width: 700px) {
   .header-comp__window-menu {
     width: 400px;
@@ -192,6 +195,7 @@
 
   .header-nav-links p {
     font-size: 17px;
+    line-height: 20px;
   }
 
   .header-nav-links p:hover:is(:last-child) {

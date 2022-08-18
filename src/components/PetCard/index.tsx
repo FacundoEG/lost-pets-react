@@ -15,10 +15,7 @@ export function LostPet(props) {
         <Subtitle>{props.name}</Subtitle>
       </div>
       <label className={css["card-label"]}>
-        <img
-          src="https://lost-pets-app.herokuapp.com/marker2.6d3bafa8.png"
-          className={css["marker"]}
-        ></img>
+        <img src="../src/assets/marker2.png" className={css["marker"]}></img>
         <ParrafoBold>Ubicacion: </ParrafoBold>
         <Caption>{props.ubication}</Caption>
       </label>
