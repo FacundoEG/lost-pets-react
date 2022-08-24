@@ -32,6 +32,7 @@ export function NavLinks({
               {userHasToken ? (
                 <a
                   onClick={() => {
+                    window.location.reload();
                     localStorage.removeItem("userData"), redirectTo("/");
                     userDataSetter(null);
                   }}

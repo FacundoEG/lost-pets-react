@@ -1,0 +1,22 @@
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  margin: 30px auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 35px;
+}
+
+.error-container {
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: #000000b0;
+  padding: 3px 7px;
+}

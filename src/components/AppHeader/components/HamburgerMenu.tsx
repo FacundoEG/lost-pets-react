@@ -68,6 +68,7 @@ export function HamburgerMenu({
             {userHasToken ? (
               <a
                 onClick={() => {
+                  window.location.reload();
                   localStorage.removeItem("userData"), redirectTo("/");
                   userDataSetter(null);
                 }}

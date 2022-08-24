@@ -4,6 +4,7 @@ let dev = process.env.NODE_ENV == "development";
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 dev ? liveServer.start({ file: "index.html" }) : false;
 
@@ -58,5 +59,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve("./index.html"),
     }),
+    new NodePolyfillPlugin(),
   ],
 };

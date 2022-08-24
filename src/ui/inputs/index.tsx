@@ -10,6 +10,7 @@ interface inputProps {
   value?: string;
   register: any;
   props: any;
+  defaultValue?: string;
 }
 
 export function LabeledInput({
@@ -20,6 +21,7 @@ export function LabeledInput({
   label,
   props,
   register,
+  defaultValue,
 }: inputProps) {
   return (
     <label className={css["label"]}>
@@ -31,6 +33,7 @@ export function LabeledInput({
         name={name}
         placeholder={placeholder}
         value={value}
+        defaultValue={defaultValue}
         {...props}
       />
     </label>

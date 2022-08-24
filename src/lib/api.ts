@@ -70,3 +70,16 @@ export async function createUser(userData) {
     })
   ).json();
 }
+
+export async function updateUserData(updateData, userToken) {
+  return await (
+    await fetch(API_BASE_URL + `/user/data`, {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `bearer ${userToken}`,
+      },
+      body: JSON.stringify(updateData),
+    })
+  ).json();
+}

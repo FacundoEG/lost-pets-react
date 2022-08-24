@@ -5,7 +5,7 @@
 .home-title {
   text-align: center;
   max-width: 600px;
-  font-size: 50px;
+  font-size: 40px;
   letter-spacing: normal;
   font-weight: 600;
   padding: 10px 10px;
@@ -16,7 +16,7 @@
   margin: 0;
   box-sizing: border-box;
   font-weight: bold;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .subtitle {
