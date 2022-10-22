@@ -1,6 +1,11 @@
 import React from "react";
 import css from "./fonts.css";
 
+type fontWithVariant = {
+  children: any;
+  variant?: string;
+};
+
 export function HomeTitle({ children }) {
   return <h1 className={css["home-title"]}>{children}</h1>;
 }
@@ -25,10 +30,13 @@ export function LinkText({ children }) {
   return <p className={css["link-text"]}>{children}</p>;
 }
 
-export function Caption({ children }) {
-  return <p className={css["caption"]}>{children}</p>;
+export function Caption({ children, variant }: fontWithVariant) {
+  return (
+    <p className={css["caption"]} style={{ color: variant }}>
+      {children}
+    </p>
+  );
 }
-
 export function ErrorText({ children }) {
   return <span className={css["error-text"]}>{children}</span>;
 }

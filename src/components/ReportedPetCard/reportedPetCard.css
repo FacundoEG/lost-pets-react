@@ -1,0 +1,52 @@
+.card-container {
+  border: 2px solid #2c2c2c;
+  width: 100%;
+  background-color: var(--card-bgc);
+  max-width: 280px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  gap: 5px;
+}
+
+.card-container:hover {
+  border: 2px solid white;
+  box-shadow: 0px -1px 5px 3px rgb(255 255 255 / 5%);
+}
+
+h3 {
+  padding: 15px 15px 5px;
+}
+
+.card-label {
+  display: flex;
+  flex-direction: row;
+  padding: 0px 15px 0px;
+  gap: 4px;
+}
+
+.pencil-link {
+  padding: 0px 15px 15px;
+  text-align: end;
+}
+
+.pencil {
+  height: 24px;
+  cursor: pointer;
+}
+
+.pencil:active {
+  filter: invert(59%) sepia(35%) saturate(1935%) hue-rotate(224deg)
+    brightness(98%) contrast(88%);
+}
+
+.marker {
+  width: 20px;
+  height: 20px;
+}
+
+.card-image {
+  height: 150px;
+  border-radius: 4px 4px 0px 0px;
+}

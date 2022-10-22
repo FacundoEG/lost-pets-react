@@ -3,7 +3,7 @@
   background-image: url(https://lost-pets-app.herokuapp.com/paw-backgr.9cbcfb26.png);
   background-repeat: revert;
   background-size: contain;
-  min-height: calc(100vh - 69px);
+  min-height: calc(100vh - 64px);
   padding: 30px 20px 70px;
   background-color: var(--page-bgc);
   display: flex;
@@ -19,4 +19,22 @@
   align-items: center;
   text-align: center;
   gap: 22px;
+}
+
+.pets-container {
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 30px auto 0px;
+}
+
+@media (min-width: 500px) {
+  .pets-container {
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3%;
+  }
 }

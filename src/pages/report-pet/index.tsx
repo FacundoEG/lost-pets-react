@@ -1,6 +1,7 @@
 import React from "react";
-import css from "./home.css";
+import css from "./reportPet.css";
 import { HomeTitle } from "ui/fonts/Fonts";
+
 export const ReportPet = () => {
   return (
     <div className={css["welcome-container"]}>

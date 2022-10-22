@@ -83,3 +83,14 @@ export async function updateUserData(updateData, userToken) {
     })
   ).json();
 }
+
+export async function getReportedPetsByUser(userToken) {
+  return await (
+    await fetch(API_BASE_URL + `/user/pets`, {
+      method: "get",
+      headers: {
+        Authorization: `bearer ${userToken}`,
+      },
+    })
+  ).json();
+}

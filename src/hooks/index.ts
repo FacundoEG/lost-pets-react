@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { lostPetsNearby, localUserData, userData } from "../atoms";
 
-// LOST PETS NEARBY HOOK
 export function usePetsNearby() {
   const itemResult = useRecoilValue(lostPetsNearby);
   return itemResult;

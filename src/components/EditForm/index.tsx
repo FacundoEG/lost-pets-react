@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import css from "./editForm.css";
 import { LabeledInput } from "ui/inputs";
 import { FormButton } from "ui/buttons/Buttons";
@@ -21,14 +21,6 @@ export const EditForm = (props) => {
 
   function getHashFromString(text: string) {
     return crypto.createHash("sha256").update(text).digest("hex");
-  }
-
-  function serializeRequest(data) {
-    const { name, password, repeatedPassword } = data;
-
-    if (name && password && repeatedPassword) return data;
-
-    if (name && !password && !repeatedPassword) return { name };
   }
 
   function resetData() {
